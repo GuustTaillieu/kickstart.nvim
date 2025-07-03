@@ -14,7 +14,9 @@ return {
         javascript = { 'eslint' },
         javascripttreact = { 'eslint' },
         typescript = { 'eslint' },
-        typescriptreact = { 'eslint' },
+        svelte = { 'eslint_d' },
+        kotlin = { 'ktlint' },
+        terraform = { 'tflint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -38,15 +40,18 @@ return {
       -- }
       --
       -- You can disable the default linters by setting their filetypes to nil:
-        lint.linters_by_ft['markdown'] = nil
-        lint.linters_by_ft['dockerfile'] = nil
-        lint.linters_by_ft['json'] = nil
-        lint.linters_by_ft['rst'] = nil
-        lint.linters_by_ft['text'] = nil
-        lint.linters_by_ft['javascript'] = nil
-        lint.linters_by_ft['javascripttreact'] = nil
-        lint.linters_by_ft['typescript'] = nil
-        lint.linters_by_ft['typescriptreact'] = nil
+      lint.linters_by_ft['markdown'] = nil
+      lint.linters_by_ft['dockerfile'] = nil
+      lint.linters_by_ft['json'] = nil
+      lint.linters_by_ft['rst'] = nil
+      lint.linters_by_ft['text'] = nil
+      lint.linters_by_ft['javascript'] = nil
+      lint.linters_by_ft['javascripttreact'] = nil
+      lint.linters_by_ft['typescript'] = nil
+      lint.linters_by_ft['typescriptreact'] = nil
+      lint.linters_by_ft['svelte'] = nil
+      lint.linters_by_ft['kotlin'] = nil
+      lint.linters_by_ft['terraform'] = nil
 
       -- Create autocommand which carries out the actual linting
       -- on the specified events.

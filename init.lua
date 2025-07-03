@@ -112,7 +112,7 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -136,6 +136,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- NOTE These are Custom
+vim.keymap.set('n', '<leader>x', ':q<CR>', { desc = 'Kill buffer' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -278,7 +281,9 @@ require('lazy').setup({
       spec = {
         { '<leader>f', group = '[F]ind' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>d', group = '[D]ebug' },
+        { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
+        { '<leader>q', group = 'Quickfix' },
       },
     },
   },
@@ -333,12 +338,12 @@ require('lazy').setup({
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
+      local actions = require 'telescope.actions'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
         defaults = {
           layout_strategy = 'horizontal',
           layout_config = {
@@ -346,11 +351,25 @@ require('lazy').setup({
             height = 0.9,
           },
           preview_width = 0.6,
+
+          path_display = { 'truncate' },
           mappings = {
-            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            n = {
+              ['<c-w>'] = actions.add_selected_to_qflist + actions.open_qflist,
+            },
+            i = {
+              ['<c-enter>'] = 'to_fuzzy_refine',
+              ['<c-j>'] = actions.cycle_history_next,
+              ['<c-k>'] = actions.cycle_history_prev,
+              ['<c-w>'] = actions.add_selected_to_qflist + actions.open_qflist,
+            },
           },
         },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -619,7 +638,11 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {},
+        ts_ls = {
+          capabilities = capabilities,
+        },
+        vue_ls = {},
+        eslint = {},
         --
 
         lua_ls = {
@@ -706,13 +729,30 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-        typescript = { 'prettierd' },
-        typescriptreact = { 'prettierd' },
+        svelte = { { 'prettierd', 'prettier', stop_after_first = true } },
+        astro = { { 'prettierd', 'prettier', stop_after_first = true } },
+        javascript = { { 'prettierd', 'prettier', stop_after_first = true } },
+        typescript = { { 'prettierd', 'prettier', stop_after_first = true } },
+        javascriptreact = { { 'prettierd', 'prettier', stop_after_first = true } },
+        typescriptreact = { { 'prettierd', 'prettier', stop_after_first = true } },
+        json = { { 'prettierd', 'prettier', stop_after_first = true } },
+        graphql = { { 'prettierd', 'prettier', stop_after_first = true } },
+        java = { 'google-java-format' },
+        kotlin = { 'ktlint' },
+        ruby = { 'standardrb' },
+        markdown = { { 'prettierd', 'prettier', stop_after_first = true } },
+        erb = { 'htmlbeautifier' },
+        html = { 'htmlbeautifier' },
+        bash = { 'beautysh' },
+        proto = { 'buf' },
+        rust = { 'rustfmt' },
+        yaml = { 'yamlfix' },
+        toml = { 'taplo' },
+        css = { { 'prettierd', 'prettier', stop_after_first = true } },
+        scss = { { 'prettierd', 'prettier', stop_after_first = true } },
+        sh = { 'shellcheck' },
+        go = { 'gofmt' },
+        xml = { 'xmllint' },
       },
     },
   },
@@ -911,22 +951,10 @@ require('lazy').setup({
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+  { import = 'kickstart.plugins' },
   { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
