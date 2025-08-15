@@ -8,6 +8,10 @@ return {
     local oil = require 'oil'
 
     oil.setup {
+      default_file_explorer = true,
+      delete_to_trash = true,
+      skip_confirm_for_simple_edits = true,
+
       columns = { 'icon' },
       keymaps = {
         ['g?'] = { 'actions.show_help', mode = 'n' },
@@ -21,9 +25,28 @@ return {
       },
       view_options = {
         show_hidden = true,
+        natural_order = true,
+        is_always_hidden = function(name, _)
+          return name == '..' or name == '.git'
+        end,
+      },
+      win_options = {
+        signcolumn = 'yes:2',
+        wrap = true,
       },
     }
 
     vim.keymap.set('n', '-', oil.toggle_float, { desc = 'Open parent directory' })
+
+    -- Always show preview
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'OilEnter',
+      callback = vim.schedule_wrap(function(args)
+        local oil = require 'oil'
+        if vim.api.nvim_get_current_buf() == args.data.buf and oil.get_cursor_entry() then
+          oil.open_preview()
+        end
+      end),
+    })
   end,
 }
