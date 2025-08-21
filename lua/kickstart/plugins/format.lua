@@ -52,7 +52,7 @@ return { -- Autoformat
       css = { { 'prettierd', 'prettier', stop_after_first = true } },
       scss = { { 'prettierd', 'prettier', stop_after_first = true } },
       sh = { 'shellcheck' },
-      go = { 'gofmt' },
+      go = { 'gofmt', 'goimports', 'goimports_reviser' },
       xml = { 'xmllint' },
     },
   },
