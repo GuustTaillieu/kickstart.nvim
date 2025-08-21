@@ -8,7 +8,7 @@ return {
     local oil = require 'oil'
 
     oil.setup {
-      default_file_explorer = true,
+      -- default_file_explorer = true,
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
 
@@ -19,13 +19,15 @@ return {
         ['<C-Space>'] = { 'actions.select' },
         ['<C-l>'] = { 'actions.select' },
         ['<C-h>'] = { 'actions.parent' },
-        ['<M-h>'] = { 'actions.select_split' },
         ['<C-c>'] = { 'actions.close', mode = 'n' },
         ['<Esc>'] = { 'actions.close', mode = 'n' },
+        ['<M-v>'] = { 'actions.select', opts = { vertical = true } },
+        ['<M-h>'] = { 'actions.select', opts = { horizontal = true } },
+        ['<M-t>'] = { 'actions.select', opts = { tab = true } },
       },
       view_options = {
         show_hidden = true,
-        natural_order = true,
+        natural_order = 'fast',
         is_always_hidden = function(name, _)
           return name == '..' or name == '.git'
         end,
@@ -34,6 +36,19 @@ return {
         signcolumn = 'yes:2',
         wrap = true,
       },
+      preview_win = {
+        disable_preview = function(filename)
+          return filename:match '^%.'
+        end,
+      },
+      sort = {
+        { 'name', 'asc' },
+      },
+      buf_options = {
+        buflisted = false,
+        bufhidden = 'delete', -- Delete the buffer immediately when hidden
+      },
+      cleanup_delay_ms = 0, -- Or set to false to disable auto-cleanup entirely if you prefer
     }
 
     vim.keymap.set('n', '-', oil.toggle_float, { desc = 'Open parent directory' })

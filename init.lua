@@ -125,6 +125,11 @@ end)
 
 -- [[ Basic Keymaps ]]
 
+vim.keymap.set('n', '<leader>Ss', '<cmd>SessionSave<CR>', { desc = 'Save session' })
+vim.keymap.set('n', '<leader>Sl', '<cmd>SessionLoad<CR>', { desc = 'Load session' })
+
+vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights' })
@@ -171,7 +176,10 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down (centered)' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Half page up (centered)' })
 
 -- Delete without yanking
-vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete without yanking' })
+vim.keymap.set({ 'n', 'v' }, 'D', '"_d', { desc = 'Delete without yanking' })
+
+-- Paste without yanking
+vim.keymap.set('x', 'p', [["_dP]], { desc = 'Paste without yanking' })
 
 -- Buffer navigation
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next buffer' })
@@ -195,7 +203,7 @@ vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines and keep cursor position'
 -- ============================================================================
 
 -- Copy Full File-Path
-vim.keymap.set('n', '<leader>ypa', function()
+vim.keymap.set('n', '<leader>yp', function()
   local path = vim.fn.expand '%:p'
   vim.fn.setreg('+', path)
   print('file:', path)
@@ -237,7 +245,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup,
-  pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'json', 'html', 'css' },
+  pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'json', 'html', 'css', 'go' },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.shiftwidth = 2
@@ -274,11 +282,13 @@ vim.api.nvim_create_autocmd('VimResized', {
 
 -- Create directories when saving files
 vim.api.nvim_create_autocmd('BufWritePre', {
-  group = augroup,
   callback = function()
-    local dir = vim.fn.expand '<afile>:p:h'
-    if vim.fn.isdirectory(dir) == 0 then
-      vim.fn.mkdir(dir, 'p')
+    local filepath = vim.fn.expand '<afile>:p:h'
+    if filepath:match '^oil://' or vim.uv.fs_realpath(filepath) == nil then
+      return
+    end
+    if vim.fn.isdirectory(filepath) == 0 then
+      vim.fn.mkdir(filepath, 'p')
     end
   end,
 })
@@ -468,17 +478,7 @@ vim.keymap.set('n', '<leader>td', duplicate_tab, { desc = 'Duplicate current tab
 vim.keymap.set('n', '<leader>tr', close_tabs_right, { desc = 'Close tabs to the right' })
 vim.keymap.set('n', '<leader>tL', close_tabs_left, { desc = 'Close tabs to the left' })
 
--- Function to close buffer but keep tab if it's the only buffer in tab
-local function smart_close_buffer()
-  local buffers_in_tab = #vim.fn.tabpagebuflist()
-  if buffers_in_tab > 1 then
-    vim.cmd 'bdelete'
-  else
-    -- If it's the only buffer in tab, close the tab
-    vim.cmd 'tabclose'
-  end
-end
-vim.keymap.set('n', '<leader>x', smart_close_buffer, { desc = 'Smart close buffer/tab' })
+vim.keymap.set('n', '<leader>x', '<cmd>q<CR>', { desc = 'Smart close buffer/tab' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
