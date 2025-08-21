@@ -5,14 +5,14 @@ return {
   opts = {}, -- Use default options
   keys = {
     {
-      '<leader>qx',
+      '<leader>dt',
       '<cmd>Trouble diagnostics toggle<cr>',
       desc = 'Toggle Diagnostics',
     },
     {
-      '<leader>qd',
+      '<leader>db',
       '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-      desc = 'Toggle Document Diagnostics',
+      desc = 'Toggle Buffer Diagnostics',
     },
     {
       '<leader>qq',
@@ -25,7 +25,12 @@ return {
       desc = 'Toggle Location List',
     },
     {
-      '<leader>qr',
+      '<leader>qc',
+      '<cmd>:lua vim.fn.setqflist({}, "r")<cr>',
+      desc = 'Clear Quickfix List',
+    },
+    {
+      '<leader>qR',
       '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
       desc = 'Toggle LSP References',
     },
