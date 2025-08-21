@@ -65,7 +65,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-space>'] = actions.add_selection,
-            ['<C-l>'] = actions.add_selection,
+            ['<C-h>'] = actions.add_selection,
+            ['<C-l>'] = actions.select_default,
             ['<C-w>'] = actions.add_selected_to_qflist + actions.open_qflist,
             ['<C-c>'] = actions.close,
           },
@@ -98,7 +99,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>f.', builtin.resume, { desc = '[F]ind [R]esume' })
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent Files' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>f<leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()

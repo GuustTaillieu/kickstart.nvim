@@ -2,6 +2,13 @@ return { -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+  dependencies = {
+    { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    {
+      'nvim-treesitter/nvim-treesitter-context',
+      opts = { enable = true, mode = 'topline', line_numbers = true },
+    },
+  },
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
@@ -30,8 +37,10 @@ return { -- Highlight, edit, and navigate code
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
+    textobjects = { select = { enable = true, lookahead = true } },
   },
-  -- There are additional nvim-treesitter modules that you can use to interact
+  -- There are additional nvim-treesitter modules that you can use textobjectsto in
+  -- eract
   -- with nvim-treesitter. You should go explore a few and see what interests you:
   --
   --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
