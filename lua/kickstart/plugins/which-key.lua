@@ -47,7 +47,12 @@ return {
     spec = {
       { '<leader>f', group = '[F]ind' },
       { '<leader>t', group = '[T]oggle' },
-      { '<leader>d', group = '[D]ebug' },
+      { '<leader>D', group = '[D]ebug' },
+      { '<leader>d', group = '[D]iagnostic' },
+      { '<leader>b', group = '[B]uffer' },
+      { '<leader>w', group = '[W]indow' },
+      { '<leader>y', group = '[Y]ank' },
+      { '<leader>S', group = '[S]ession' },
       { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
       { '<leader>q', group = 'Quickfix' },
     },
