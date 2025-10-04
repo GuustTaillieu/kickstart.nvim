@@ -24,6 +24,7 @@ return {
         ['<M-v>'] = { 'actions.select', opts = { vertical = true } },
         ['<M-h>'] = { 'actions.select', opts = { horizontal = true } },
         ['<M-t>'] = { 'actions.select', opts = { tab = true } },
+        ['<C-s>'] = false,
       },
       view_options = {
         show_hidden = true,

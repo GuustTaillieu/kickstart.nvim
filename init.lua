@@ -209,6 +209,22 @@ vim.keymap.set('n', '<leader>yp', function()
   print('file:', path)
 end)
 
+-- Copy all content of the current buffer
+vim.keymap.set('n', '<leader>ya', function()
+  vim.fn.setreg('+', vim.api.nvim_buf_get_lines(0, 0, -1, false))
+  vim.notify 'Copied all content of the current buffer'
+end)
+
+-- Delete all content of the current buffer
+vim.keymap.set('n', '<leader>da', function()
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
+end)
+
+-- Select all content of the current buffer
+vim.keymap.set('n', '<leader>sa', function()
+  vim.api.nvim_feedkeys('ggVG', 'n', false)
+end)
+
 -- Basic autocommands
 local augroup = vim.api.nvim_create_augroup('UserConfig', {})
 
@@ -525,6 +541,8 @@ require('lazy').setup({
     },
   },
 })
+
+require 'custom.after.transparency'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
