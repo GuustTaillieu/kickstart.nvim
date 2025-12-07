@@ -513,7 +513,6 @@ rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-
   { import = 'kickstart.plugins' },
   { import = 'kickstart.plugins.lsp' },
   { import = 'custom.plugins' },

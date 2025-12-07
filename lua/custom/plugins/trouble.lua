@@ -20,6 +20,16 @@ return {
       desc = 'Toggle Quickfix List',
     },
     {
+      '<leader>qn',
+      '<cmd>cnext<cr>',
+      desc = 'Diagnostic Next',
+    },
+    {
+      '<leader>qp',
+      '<cmd>cprevious<cr>',
+      desc = 'Diagnostic Previous',
+    },
+    {
       '<leader>ql',
       '<cmd>Trouble loclist toggle<cr>',
       desc = 'Toggle Location List',

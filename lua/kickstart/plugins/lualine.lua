@@ -4,7 +4,7 @@ return {
   config = function()
     require('lualine').setup {
       options = {
-        theme = 'tokyonight',
+        theme = vim.g.colors_name or 'auto',
         component_separators = '',
         section_separators = { left = '', right = '' },
         disabled_filetypes = {

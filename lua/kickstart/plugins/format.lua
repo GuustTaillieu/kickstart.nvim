@@ -19,8 +19,14 @@ return { -- Autoformat
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
       local disable_filetypes = { c = true, cpp = true }
+      local slow_filetypes = { kotlin = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
+      elseif slow_filetypes[vim.bo[bufnr].filetype] then
+        return {
+          timeout_ms = 2500,
+          lsp_format = 'fallback',
+        }
       else
         return {
           timeout_ms = 500,
@@ -54,6 +60,8 @@ return { -- Autoformat
       sh = { 'shellcheck' },
       go = { 'gofmt', 'goimports', 'goimports_reviser' },
       xml = { 'xmllint' },
+      c = { 'clang-format' },
+      python = { 'black' },
     },
   },
 }
