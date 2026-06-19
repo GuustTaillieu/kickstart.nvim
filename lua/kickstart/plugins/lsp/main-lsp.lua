@@ -152,6 +152,9 @@ return {
       vue_ls = {},
       eslint = {},
       yamlls = {},
+      qmlls = {
+        capabilities = capabilities,
+      },
       html = {
         filetypes = { 'html', 'htmldjango', 'htmldjango-template', 'htmljinja', 'htmlmin' },
       },

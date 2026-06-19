@@ -186,10 +186,10 @@ vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
 
 -- Move lines up/down
-vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { desc = 'Move line down' })
-vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { desc = 'Move line up' })
-vim.keymap.set('v', '<A-j>', "<cmd>m '>+1<CR>gv=gv", { desc = 'Move selection down' })
-vim.keymap.set('v', '<A-k>', "<cmd>m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+-- vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { desc = 'Move line down' })
+-- vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { desc = 'Move line up' })
+-- vim.keymap.set('v', '<A-j>', "<cmd>m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+-- vim.keymap.set('v', '<A-k>', "<cmd>m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Better indenting in visual mode
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })

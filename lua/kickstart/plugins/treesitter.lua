@@ -33,7 +33,7 @@ return { -- Highlight, edit, and navigate code
       'jsonc',
       'markdown',
       'markdown_inline',
-      'python',
+      -- 'python',
       'rust',
       'toml',
       'yaml',
@@ -42,14 +42,25 @@ return { -- Highlight, edit, and navigate code
     auto_install = true,
     highlight = {
       enable = true,
-      disable = { 'python' }, -- list of language that will be disabled
+      disable = {}, -- list of language that will be disabled
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
       --  If you are experiencing weird indenting issues, add the language to
       --  the list of additional_vim_regex_highlighting and disabled languages for indent.
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
-    textobjects = { select = { enable = true, lookahead = true } },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
+      },
+    },
   },
   -- There are additional nvim-treesitter modules that you can use textobjectsto in
   -- eract
