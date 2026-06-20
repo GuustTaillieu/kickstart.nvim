@@ -1,7 +1,7 @@
 -- Autocompletion
 local function gh(repo) return 'https://github.com/' .. repo end
 do
-  vim.pack.add({ gh 'saghen/blink.lib' })
+  vim.pack.add { gh 'saghen/blink.lib' }
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '2.*' } }
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
   require('blink.cmp').setup {

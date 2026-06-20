@@ -3,6 +3,6 @@ do
   vim.pack.add {
     gh 'OXY2DEV/markview.nvim',
     gh 'saghen/blink.lib',
-    gh 'saghen/blink.cmp'
+    gh 'saghen/blink.cmp',
   }
 end

@@ -1,7 +1,7 @@
 -- Useful plugin to show you pending keybinds.
 local function gh(repo) return 'https://github.com/' .. repo end
 do
-  vim.pack.add({ gh 'folke/which-key.nvim' })
+  vim.pack.add { gh 'folke/which-key.nvim' }
   require('which-key').setup {
     -- delay between pressing a key and opening which-key (milliseconds)
     -- this setting is independent of vim.o.timeoutlen
@@ -53,7 +53,7 @@ do
       { '<leader>w', group = '[W]indow' },
       { '<leader>y', group = '[Y]ank' },
       { '<leader>S', group = '[S]ession' },
-      { '<leader>g', group = 'Git',         mode = { 'n', 'v' } },
+      { '<leader>g', group = 'Git', mode = { 'n', 'v' } },
       { '<leader>q', group = 'Quickfix' },
     },
   }

@@ -29,7 +29,7 @@
 vim.g.have_nerd_font = true
 
 -- Key mappings
-vim.g.mapleader = ' '      -- Set leader key to space
+vim.g.mapleader = ' ' -- Set leader key to space
 vim.g.maplocalleader = ' ' -- Set local leader key (NEW)
 
 -- Make background transparent
@@ -37,29 +37,29 @@ vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' }) -- Make sign column transparent
-vim.opt.number = true                                 -- Line numbers
+vim.opt.number = true -- Line numbers
 
 -- Basic settings
 vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.cursorline = true     -- Highlight current line
-vim.opt.wrap = false          -- Don't wrap lines
-vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
-vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
+vim.opt.cursorline = true -- Highlight current line
+vim.opt.wrap = false -- Don't wrap lines
+vim.opt.scrolloff = 10 -- Keep 10 lines above/below cursor
+vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 
 -- Indentation
-vim.opt.tabstop = 2        -- Tab width
-vim.opt.shiftwidth = 2     -- Indent width
-vim.opt.softtabstop = 2    -- Soft tab stop
-vim.opt.expandtab = true   -- Use spaces instead of tabs
+vim.opt.tabstop = 2 -- Tab width
+vim.opt.shiftwidth = 2 -- Indent width
+vim.opt.softtabstop = 2 -- Soft tab stop
+vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.smartindent = true -- Smart auto-indenting
-vim.opt.autoindent = true  -- Copy indent from current line
+vim.opt.autoindent = true -- Copy indent from current line
 vim.o.breakindent = true
 
 -- Search settings
 vim.opt.ignorecase = true -- Case insensitive search
-vim.opt.smartcase = true  -- Case sensitive if uppercase in search
-vim.opt.hlsearch = false  -- Don't highlight search results
-vim.opt.incsearch = true  -- Show matches as you type
+vim.opt.smartcase = true -- Case sensitive if uppercase in search
+vim.opt.hlsearch = false -- Don't highlight search results
+vim.opt.incsearch = true -- Show matches as you type
 
 -- Visual settings
 vim.opt.termguicolors = true -- Enable 24-bit colors
@@ -83,45 +83,43 @@ vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' } -- Sets how white
 -- Folding settings
 vim.opt.foldmethod = 'expr' -- Use expression for folding
 -- vim.wo.vim.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
-vim.opt.foldlevel = 99      -- Start with all folds open
+vim.opt.foldlevel = 99 -- Start with all folds open
 
 -- File handling
-vim.opt.backup = false                           -- Don't create backup files
-vim.opt.writebackup = false                      -- Don't create backup before writing
-vim.opt.swapfile = false                         -- Don't create swap files
-vim.opt.undofile = true                          -- Persistent undo
-vim.o.undofile = true                            -- Save undo history
+vim.opt.backup = false -- Don't create backup files
+vim.opt.writebackup = false -- Don't create backup before writing
+vim.opt.swapfile = false -- Don't create swap files
+vim.opt.undofile = true -- Persistent undo
+vim.o.undofile = true -- Save undo history
 vim.opt.undodir = vim.fn.expand '~/.vim/undodir' -- Undo directory
-vim.opt.updatetime = 250                         -- Faster completion
-vim.opt.timeoutlen = 500                         -- Key timeout duration
-vim.opt.ttimeoutlen = 0                          -- Key code timeout
-vim.opt.autoread = true                          -- Auto reload files changed outside vim
-vim.opt.autowrite = false                        -- Don't auto save
+vim.opt.updatetime = 250 -- Faster completion
+vim.opt.timeoutlen = 500 -- Key timeout duration
+vim.opt.ttimeoutlen = 0 -- Key code timeout
+vim.opt.autoread = true -- Auto reload files changed outside vim
+vim.opt.autowrite = false -- Don't auto save
 
 -- Behavior settings
-vim.opt.hidden = true                  -- Allow hidden buffers
-vim.opt.errorbells = false             -- No error bells
+vim.opt.hidden = true -- Allow hidden buffers
+vim.opt.errorbells = false -- No error bells
 vim.opt.backspace = 'indent,eol,start' -- Better backspace behavior
-vim.opt.autochdir = false              -- Don't auto change directory
-vim.opt.iskeyword:append '-'           -- Treat dash as part of word
-vim.opt.path:append '**'               -- include subdirectories in search
-vim.opt.selection = 'exclusive'        -- Selection behavior
-vim.opt.mouse = 'a'                    -- Enable mouse support
+vim.opt.autochdir = false -- Don't auto change directory
+vim.opt.iskeyword:append '-' -- Treat dash as part of word
+vim.opt.path:append '**' -- include subdirectories in search
+vim.opt.selection = 'exclusive' -- Selection behavior
+vim.opt.mouse = 'a' -- Enable mouse support
 vim.opt.clipboard:append 'unnamedplus' -- Use system clipboard
-vim.opt.modifiable = true              -- Allow buffer modifications
-vim.opt.encoding = 'UTF-8'             -- Set encoding
-vim.opt.splitbelow = true              -- Horizontal splits go below
-vim.opt.splitright = true              -- Vertical splits go right
+vim.opt.modifiable = true -- Allow buffer modifications
+vim.opt.encoding = 'UTF-8' -- Set encoding
+vim.opt.splitbelow = true -- Horizontal splits go below
+vim.opt.splitright = true -- Vertical splits go right
 vim.o.inccommand = 'split'
-vim.o.confirm = true                   -- Ask before closing (unsaved changes)
+vim.o.confirm = true -- Ask before closing (unsaved changes)
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
@@ -169,7 +167,6 @@ vim.keymap.set('n', '^[[1;9l', '<C-w>L', { desc = 'Move window to the right' })
 vim.keymap.set('n', '^[[1;9j', '<C-w>J', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '^[[1;9k', '<C-w>K', { desc = 'Move window to the upper' })
 
-
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
@@ -177,7 +174,7 @@ vim.diagnostic.config {
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
-  virtual_text = true,   -- Text shows up at the end of the line
+  virtual_text = true, -- Text shows up at the end of the line
   virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
@@ -241,14 +238,10 @@ vim.keymap.set('n', '<leader>ya', function()
 end)
 
 -- Delete all content of the current buffer
-vim.keymap.set('n', '<leader>da', function()
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
-end)
+vim.keymap.set('n', '<leader>da', function() vim.api.nvim_buf_set_lines(0, 0, -1, false, {}) end)
 
 -- Select all content of the current buffer
-vim.keymap.set('n', '<leader>sa', function()
-  vim.api.nvim_feedkeys('ggVG', 'n', false)
-end)
+vim.keymap.set('n', '<leader>sa', function() vim.api.nvim_feedkeys('ggVG', 'n', false) end)
 
 -- Basic autocommands
 local augroup = vim.api.nvim_create_augroup('UserConfig', {})
@@ -257,9 +250,7 @@ local augroup = vim.api.nvim_create_augroup('UserConfig', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+  callback = function() vim.hl.on_yank() end,
 })
 
 -- Return to last edit position when opening files
@@ -268,9 +259,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
+    if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
   end,
 })
 
@@ -297,9 +286,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('TermClose', {
   group = augroup,
   callback = function()
-    if vim.v.event.status == 0 then
-      vim.api.nvim_buf_delete(0, {})
-    end
+    if vim.v.event.status == 0 then vim.api.nvim_buf_delete(0, {}) end
   end,
 })
 
@@ -316,21 +303,15 @@ vim.api.nvim_create_autocmd('TermOpen', {
 -- Auto-resize splits when window is resized
 vim.api.nvim_create_autocmd('VimResized', {
   group = augroup,
-  callback = function()
-    vim.cmd 'tabdo wincmd ='
-  end,
+  callback = function() vim.cmd 'tabdo wincmd =' end,
 })
 
 -- Create directories when saving files
 vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function()
     local filepath = vim.fn.expand '<afile>:p:h'
-    if filepath:match '^oil://' or vim.uv.fs_realpath(filepath) == nil then
-      return
-    end
-    if vim.fn.isdirectory(filepath) == 0 then
-      vim.fn.mkdir(filepath, 'p')
-    end
+    if filepath:match '^oil://' or vim.uv.fs_realpath(filepath) == nil then return end
+    if vim.fn.isdirectory(filepath) == 0 then vim.fn.mkdir(filepath, 'p') end
   end,
 })
 
@@ -348,9 +329,7 @@ vim.opt.maxmempattern = 20000
 
 -- Create undo directory if it doesn't exist
 local undodir = vim.fn.expand '~/.vim/undodir'
-if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, 'p')
-end
+if vim.fn.isdirectory(undodir) == 0 then vim.fn.mkdir(undodir, 'p') end
 
 -- ============================================================================
 -- FLOATING TERMINAL
@@ -399,8 +378,7 @@ local function FloatingTerminal()
   vim.api.nvim_win_set_option(terminal_state.win, 'winblend', 0)
 
   -- Set transparent background for the window
-  vim.api.nvim_win_set_option(terminal_state.win, 'winhighlight',
-    'Normal:FloatingTermNormal,FloatBorder:FloatingTermBorder')
+  vim.api.nvim_win_set_option(terminal_state.win, 'winhighlight', 'Normal:FloatingTermNormal,FloatBorder:FloatingTermBorder')
 
   -- Define highlight groups for transparency
   vim.api.nvim_set_hl(0, 'FloatingTermNormal', { bg = 'none' })
@@ -416,9 +394,7 @@ local function FloatingTerminal()
     end
   end
 
-  if not has_terminal then
-    vim.fn.termopen(os.getenv 'SHELL')
-  end
+  if not has_terminal then vim.fn.termopen(os.getenv 'SHELL') end
 
   terminal_state.is_open = true
   vim.cmd 'startinsert'
@@ -446,8 +422,7 @@ end
 
 -- Key mappings
 vim.keymap.set('n', '<leader>tft', FloatingTerminal, { noremap = true, silent = true, desc = 'Toggle floating terminal' })
-vim.keymap.set('n', '<leader>tt', '<cmd>horizontal terminal<CR>',
-  { noremap = true, silent = true, desc = 'Toggle terminal' })
+vim.keymap.set('n', '<leader>tt', '<cmd>horizontal terminal<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
 vim.keymap.set('t', '<Esc>', function()
   if terminal_state.is_open then
     vim.api.nvim_win_close(terminal_state.win, false)
@@ -461,7 +436,7 @@ end, { noremap = true, silent = true, desc = 'Close floating terminal from termi
 
 -- Tab display settings
 vim.opt.showtabline = 1 -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
-vim.opt.tabline = ''    -- Use default tabline (empty string uses built-in)
+vim.opt.tabline = '' -- Use default tabline (empty string uses built-in)
 
 -- Transparent tabline appearance
 vim.cmd [[
@@ -480,9 +455,7 @@ vim.keymap.set('n', '<leader>t<', '<cmd>tabmove -1<CR>', { desc = 'Move tab left
 -- Function to open file in new tab
 local function open_file_in_tab()
   vim.ui.input({ prompt = 'File to open in new tab: ', completion = 'file' }, function(input)
-    if input and input ~= '' then
-      vim.cmd('tabnew ' .. input)
-    end
+    if input and input ~= '' then vim.cmd('tabnew ' .. input) end
   end)
 end
 
@@ -555,10 +528,7 @@ do
       end
 
       if name == 'LuaSnip' then
-        if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then
-          run_build(name, { 'make', 'install_jsregexp' },
-            ev.data.path)
-        end
+        if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then run_build(name, { 'make', 'install_jsregexp' }, ev.data.path) end
         return
       end
 
@@ -570,7 +540,6 @@ do
     end,
   })
 end
-
 
 --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
 require 'kickstart.plugins'

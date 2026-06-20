@@ -16,7 +16,7 @@ do
     svelte = { 'eslint_d' },
     kotlin = { 'ktlint' },
     terraform = { 'tflint' },
-    ruby = { "ruby" },
+    ruby = { 'ruby' },
   }
 
   -- Create autocommand which carries out the actual linting

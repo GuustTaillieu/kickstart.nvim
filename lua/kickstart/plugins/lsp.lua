@@ -3,7 +3,6 @@ do
   vim.pack.add { gh 'j-hui/fidget.nvim' }
   require('fidget').setup {}
 
-
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function(event)
@@ -65,9 +64,7 @@ do
       --
       -- This may be unwanted, since they displace some of your code
       if client and client:supports_method('textDocument/inlayHint', event.buf) then
-        map('<leader>th',
-          function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
-          '[T]oggle Inlay [H]ints')
+        map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
       end
     end,
   })
@@ -118,7 +115,6 @@ do
         },
       },
     },
-
 
     stylua = {}, -- Used to format Lua code
 
@@ -215,8 +211,6 @@ vim.diagnostic.config {
     end,
   },
 }
-
-
 
 -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
 local open_floating_preview = vim.lsp.util.open_floating_preview

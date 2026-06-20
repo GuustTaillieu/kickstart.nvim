@@ -74,20 +74,14 @@ do
   }
 
   local minifiles_toggle = function(dir)
-    if not MiniFiles.close() then
-      MiniFiles.open(dir)
-    end
+    if not MiniFiles.close() then MiniFiles.open(dir) end
   end
 
-  local open_file_in_minifiles = function()
-    minifiles_toggle(vim.fn.expand '%:p')
-  end
+  local open_file_in_minifiles = function() minifiles_toggle(vim.fn.expand '%:p') end
 
   local set_cwd = function()
     local path = (MiniFiles.get_fs_entry() or {}).path
-    if path == nil then
-      return vim.notify('Cursor is not on valid entry', vim.log.levels.ERROR)
-    end
+    if path == nil then return vim.notify('Cursor is not on valid entry', vim.log.levels.ERROR) end
     vim.fn.chdir(vim.fs.dirname(path))
   end
 
@@ -95,9 +89,7 @@ do
   local yank_path = function()
     if MiniFiles.get_explorer_state().target_window ~= nil then
       local path = (MiniFiles.get_fs_entry() or {}).path
-      if path == nil then
-        vim.notify('Cursor is not on valid entry', vim.log.levels.ERROR)
-      end
+      if path == nil then vim.notify('Cursor is not on valid entry', vim.log.levels.ERROR) end
       vim.fn.setreg(vim.v.register, path)
     end
   end
