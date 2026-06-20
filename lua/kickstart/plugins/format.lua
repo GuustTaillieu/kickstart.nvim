@@ -1,32 +1,15 @@
-return { -- Autoformat
-  'stevearc/conform.nvim',
-  event = { 'BufWritePre' },
-  cmd = { 'ConformInfo' },
-  keys = {
-    {
-      '<leader>=',
-      function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
-      end,
-      mode = '',
-      desc = '[F]ormat buffer',
-    },
-  },
-  opts = {
+local function gh(repo) return 'https://github.com/' .. repo end
+do
+  vim.pack.add { gh 'stevearc/conform.nvim' }
+  require('conform').setup {
     notify_on_error = false,
     format_on_save = function(bufnr)
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
-      local slow_filetypes = { kotlin = true }
+      local disable_filetypes = {}
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
-      elseif slow_filetypes[vim.bo[bufnr].filetype] then
-        return {
-          timeout_ms = 2500,
-          lsp_format = 'fallback',
-        }
       else
         return {
           timeout_ms = 500,
@@ -63,5 +46,7 @@ return { -- Autoformat
       c = { 'clang-format' },
       python = { 'black' },
     },
-  },
-}
+  }
+
+  vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+end
