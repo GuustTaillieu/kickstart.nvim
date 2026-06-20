@@ -1,15 +1,10 @@
 -- Autocompletion
-return {
-  'saghen/blink.cmp',
-  event = 'VimEnter',
-  version = '1.*',
-  dependencies = {
-    'L3MON4D3/LuaSnip',
-    'folke/lazydev.nvim',
-  },
-  --- @module 'blink.cmp'
-  --- @type blink.cmp.Config
-  opts = {
+local function gh(repo) return 'https://github.com/' .. repo end
+do
+  vim.pack.add({ gh 'saghen/blink.lib' })
+  vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '2.*' } }
+  vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
+  require('blink.cmp').setup {
     keymap = {
       -- 'default' (recommended) for mappings similar to built-in completions
       --   <c-y> to accept ([y]es) the completion.
@@ -61,10 +56,7 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
-      providers = {
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-      },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
 
     snippets = { preset = 'luasnip' },
@@ -80,5 +72,5 @@ return {
 
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
-  },
-}
+  }
+end

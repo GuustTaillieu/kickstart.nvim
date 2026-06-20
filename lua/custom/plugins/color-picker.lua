@@ -1,17 +1,5 @@
-return {
-  'eero-lehtinen/oklch-color-picker.nvim',
-  event = 'VeryLazy',
-  version = '*',
-  keys = {
-    -- One handed keymap recommended, you will be using the mouse
-    {
-      '<leader>v',
-      function()
-        require('oklch-color-picker').pick_under_cursor()
-      end,
-      desc = 'Color pick under cursor',
-    },
-  },
-  ---@type oklch.Opts
-  opts = {},
-}
+local function gh(repo) return 'https://github.com/' .. repo end
+do
+  vim.pack.add { gh 'eero-lehtinen/oklch-color-picker.nvim' }
+  require('oklch-color-picker').setup {}
+end

@@ -29,7 +29,7 @@
 vim.g.have_nerd_font = true
 
 -- Key mappings
-vim.g.mapleader = ' ' -- Set leader key to space
+vim.g.mapleader = ' '      -- Set leader key to space
 vim.g.maplocalleader = ' ' -- Set local leader key (NEW)
 
 -- Make background transparent
@@ -37,29 +37,29 @@ vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' }) -- Make sign column transparent
-vim.opt.number = true -- Line numbers
+vim.opt.number = true                                 -- Line numbers
 
 -- Basic settings
 vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.cursorline = true -- Highlight current line
-vim.opt.wrap = false -- Don't wrap lines
-vim.opt.scrolloff = 10 -- Keep 10 lines above/below cursor
-vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
+vim.opt.cursorline = true     -- Highlight current line
+vim.opt.wrap = false          -- Don't wrap lines
+vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
+vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 
 -- Indentation
-vim.opt.tabstop = 2 -- Tab width
-vim.opt.shiftwidth = 2 -- Indent width
-vim.opt.softtabstop = 2 -- Soft tab stop
-vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.tabstop = 2        -- Tab width
+vim.opt.shiftwidth = 2     -- Indent width
+vim.opt.softtabstop = 2    -- Soft tab stop
+vim.opt.expandtab = true   -- Use spaces instead of tabs
 vim.opt.smartindent = true -- Smart auto-indenting
-vim.opt.autoindent = true -- Copy indent from current line
+vim.opt.autoindent = true  -- Copy indent from current line
 vim.o.breakindent = true
 
 -- Search settings
 vim.opt.ignorecase = true -- Case insensitive search
-vim.opt.smartcase = true -- Case sensitive if uppercase in search
-vim.opt.hlsearch = false -- Don't highlight search results
-vim.opt.incsearch = true -- Show matches as you type
+vim.opt.smartcase = true  -- Case sensitive if uppercase in search
+vim.opt.hlsearch = false  -- Don't highlight search results
+vim.opt.incsearch = true  -- Show matches as you type
 
 -- Visual settings
 vim.opt.termguicolors = true -- Enable 24-bit colors
@@ -83,37 +83,37 @@ vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' } -- Sets how white
 -- Folding settings
 vim.opt.foldmethod = 'expr' -- Use expression for folding
 -- vim.wo.vim.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
-vim.opt.foldlevel = 99 -- Start with all folds open
+vim.opt.foldlevel = 99      -- Start with all folds open
 
 -- File handling
-vim.opt.backup = false -- Don't create backup files
-vim.opt.writebackup = false -- Don't create backup before writing
-vim.opt.swapfile = false -- Don't create swap files
-vim.opt.undofile = true -- Persistent undo
-vim.o.undofile = true -- Save undo history
+vim.opt.backup = false                           -- Don't create backup files
+vim.opt.writebackup = false                      -- Don't create backup before writing
+vim.opt.swapfile = false                         -- Don't create swap files
+vim.opt.undofile = true                          -- Persistent undo
+vim.o.undofile = true                            -- Save undo history
 vim.opt.undodir = vim.fn.expand '~/.vim/undodir' -- Undo directory
-vim.opt.updatetime = 250 -- Faster completion
-vim.opt.timeoutlen = 500 -- Key timeout duration
-vim.opt.ttimeoutlen = 0 -- Key code timeout
-vim.opt.autoread = true -- Auto reload files changed outside vim
-vim.opt.autowrite = false -- Don't auto save
+vim.opt.updatetime = 250                         -- Faster completion
+vim.opt.timeoutlen = 500                         -- Key timeout duration
+vim.opt.ttimeoutlen = 0                          -- Key code timeout
+vim.opt.autoread = true                          -- Auto reload files changed outside vim
+vim.opt.autowrite = false                        -- Don't auto save
 
 -- Behavior settings
-vim.opt.hidden = true -- Allow hidden buffers
-vim.opt.errorbells = false -- No error bells
+vim.opt.hidden = true                  -- Allow hidden buffers
+vim.opt.errorbells = false             -- No error bells
 vim.opt.backspace = 'indent,eol,start' -- Better backspace behavior
-vim.opt.autochdir = false -- Don't auto change directory
-vim.opt.iskeyword:append '-' -- Treat dash as part of word
-vim.opt.path:append '**' -- include subdirectories in search
-vim.opt.selection = 'exclusive' -- Selection behavior
-vim.opt.mouse = 'a' -- Enable mouse support
+vim.opt.autochdir = false              -- Don't auto change directory
+vim.opt.iskeyword:append '-'           -- Treat dash as part of word
+vim.opt.path:append '**'               -- include subdirectories in search
+vim.opt.selection = 'exclusive'        -- Selection behavior
+vim.opt.mouse = 'a'                    -- Enable mouse support
 vim.opt.clipboard:append 'unnamedplus' -- Use system clipboard
-vim.opt.modifiable = true -- Allow buffer modifications
-vim.opt.encoding = 'UTF-8' -- Set encoding
-vim.opt.splitbelow = true -- Horizontal splits go below
-vim.opt.splitright = true -- Vertical splits go right
+vim.opt.modifiable = true              -- Allow buffer modifications
+vim.opt.encoding = 'UTF-8'             -- Set encoding
+vim.opt.splitbelow = true              -- Horizontal splits go below
+vim.opt.splitright = true              -- Vertical splits go right
 vim.o.inccommand = 'split'
-vim.o.confirm = true -- Ask before closing (unsaved changes)
+vim.o.confirm = true                   -- Ask before closing (unsaved changes)
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -122,6 +122,9 @@ vim.o.confirm = true -- Ask before closing (unsaved changes)
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
+
+-- Don't show the mode, since it's already in the status line
+vim.o.showmode = false
 
 -- [[ Basic Keymaps ]]
 
@@ -166,8 +169,30 @@ vim.keymap.set('n', '^[[1;9l', '<C-w>L', { desc = 'Move window to the right' })
 vim.keymap.set('n', '^[[1;9j', '<C-w>J', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '^[[1;9k', '<C-w>K', { desc = 'Move window to the upper' })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+
+vim.diagnostic.config {
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+
+  -- Can switch between these as you prefer
+  virtual_text = true,   -- Text shows up at the end of the line
+  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
+
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float {
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      }
+    end,
+  },
+}
+
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Center screen when jumping
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result (centered)' })
@@ -186,10 +211,10 @@ vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
 
 -- Move lines up/down
--- vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { desc = 'Move line down' })
--- vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { desc = 'Move line up' })
--- vim.keymap.set('v', '<A-j>', "<cmd>m '>+1<CR>gv=gv", { desc = 'Move selection down' })
--- vim.keymap.set('v', '<A-k>', "<cmd>m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { desc = 'Move line down' })
+vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { desc = 'Move line up' })
+vim.keymap.set('v', '<A-j>', "<cmd>m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+vim.keymap.set('v', '<A-k>', "<cmd>m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Better indenting in visual mode
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
@@ -374,7 +399,8 @@ local function FloatingTerminal()
   vim.api.nvim_win_set_option(terminal_state.win, 'winblend', 0)
 
   -- Set transparent background for the window
-  vim.api.nvim_win_set_option(terminal_state.win, 'winhighlight', 'Normal:FloatingTermNormal,FloatBorder:FloatingTermBorder')
+  vim.api.nvim_win_set_option(terminal_state.win, 'winhighlight',
+    'Normal:FloatingTermNormal,FloatBorder:FloatingTermBorder')
 
   -- Define highlight groups for transparency
   vim.api.nvim_set_hl(0, 'FloatingTermNormal', { bg = 'none' })
@@ -420,7 +446,8 @@ end
 
 -- Key mappings
 vim.keymap.set('n', '<leader>tft', FloatingTerminal, { noremap = true, silent = true, desc = 'Toggle floating terminal' })
-vim.keymap.set('n', '<leader>tt', '<cmd>horizontal terminal<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
+vim.keymap.set('n', '<leader>tt', '<cmd>horizontal terminal<CR>',
+  { noremap = true, silent = true, desc = 'Toggle terminal' })
 vim.keymap.set('t', '<Esc>', function()
   if terminal_state.is_open then
     vim.api.nvim_win_close(terminal_state.win, false)
@@ -434,7 +461,7 @@ end, { noremap = true, silent = true, desc = 'Close floating terminal from termi
 
 -- Tab display settings
 vim.opt.showtabline = 1 -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
-vim.opt.tabline = '' -- Use default tabline (empty string uses built-in)
+vim.opt.tabline = ''    -- Use default tabline (empty string uses built-in)
 
 -- Transparent tabline appearance
 vim.cmd [[
@@ -496,50 +523,58 @@ vim.keymap.set('n', '<leader>tL', close_tabs_left, { desc = 'Close tabs to the l
 
 vim.keymap.set('n', '<leader>x', '<cmd>q<CR>', { desc = 'Smart close buffer/tab' })
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
+-- ============================================================
+-- SECTION 3: PLUGIN MANAGER INTRO
+-- vim.pack intro, build hooks
+-- ============================================================
+do
+  local function run_build(name, cmd, cwd)
+    local result = vim.system(cmd, { cwd = cwd }):wait()
+    if result.code ~= 0 then
+      local stderr = result.stderr or ''
+      local stdout = result.stdout or ''
+      local output = stderr ~= '' and stderr or stdout
+      if output == '' then output = 'No output from build command.' end
+      vim.notify(('Build failed for %s:\n%s'):format(name, output), vim.log.levels.ERROR)
+    end
   end
+
+  -- This autocommand runs after a plugin is installed or updated and
+  --  runs the appropriate build command for that plugin if necessary.
+  --
+  -- See `:help vim.pack-events`
+  vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(ev)
+      local name = ev.data.spec.name
+      local kind = ev.data.kind
+      if kind ~= 'install' and kind ~= 'update' then return end
+
+      if name == 'telescope-fzf-native.nvim' and vim.fn.executable 'make' == 1 then
+        run_build(name, { 'make' }, ev.data.path)
+        return
+      end
+
+      if name == 'LuaSnip' then
+        if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then
+          run_build(name, { 'make', 'install_jsregexp' },
+            ev.data.path)
+        end
+        return
+      end
+
+      if name == 'nvim-treesitter' then
+        if not ev.data.active then vim.cmd.packadd 'nvim-treesitter' end
+        vim.cmd 'TSUpdate'
+        return
+      end
+    end,
+  })
 end
 
----@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
-require('lazy').setup({
-  { import = 'kickstart.plugins' },
-  { import = 'kickstart.plugins.lsp' },
-  { import = 'custom.plugins' },
-  --
-  -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
-  -- you can continue same window with `<space>sr` which resumes last telescope search
-}, {
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
-  },
-})
+--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+require 'kickstart.plugins'
+require 'custom.plugins'
 
 require 'custom.after.transparency'
 
